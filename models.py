@@ -1,18 +1,27 @@
+# -*- coding: utf-8 -*-
 from app import db
 from datetime import datetime
+import re
 
-class Post(db.Mode):
 
-    id = db.Column(db.integer, primary_key = True)
-    title = db.Column(db.String(140)) #
+def slugify(s):
+    pattern = r'[^\w+]'
+    return re.sub(pattern, '-', s)
+
+class Post(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    title = db.Column(db.String(140)) # Заголовок
     slug = db.Column(db.String(140), unique=True) # URL ЧПУ
     body = db.Column(db.Text)
-    created = db.Column(db.DateTime, default=datetime.nuw())
+    created = db.Column(db.DateTime, default=datetime.now()) # Дата создания
 
     def __init__(self, *args, **kwargs):
-        super(Post, self), __init__(*args, **kwargs)
-        self.slug = generate_slug()
+        super(Post, self).__init__(*args, **kwargs)
+        self.generate_slug()
 
     def generate_slug(self):
         if self.title:
             self.slug = slugify(self.title)
+
+    def __repr__(self):
+        return '<Post id: {}, title: {}>'.format(self.id, self.title)
