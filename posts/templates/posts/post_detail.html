@@ -4,7 +4,19 @@
     Blueprint
 {% endblock %}
 
-{% block content %}
-<h1>{{ post.title}} </h1>
-<p>{{ post.body}} </p>
-{% endblock %}
+    {% block content %}
+
+    <h1>{{ post.title}} </h1>
+
+    <p>{{ post.body}} </p>
+
+    <ul>
+        {% for tag in tags %}
+
+        <li><a href="{{ url_for('posts.tag_detail', slug=tag.slug) }}">{{ tag.name }}</li>
+
+        {% endfor %}
+
+    </ul>
+
+    {% endblock %}
