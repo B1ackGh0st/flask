@@ -17,18 +17,45 @@
   </head>
 
   <body>
-
-    <div class="container">
-      <div class="nav-scroller py-1 mb-2">
-        <nav class="nav d-flex justify-content-between">
-          <a class="p-2 text-muted" href="{{ url_for('index') }}">Home</a>
-          <a class="p-2 text-muted" href="{{ url_for('about') }}">About</a>
-          <a class="p-2 text-muted" href="{{ url_for('contact') }}">Contact</a>
-          <a class="p-2 text-muted" href="{{ url_for('posts.index') }}">Posts</a>
-        </nav>
-      </div>
-
-    </div>
+    <header>
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="#">Carousel</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="{{ url_for('index') }}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('about') }}">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('contact') }}">Contact</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('posts.index') }}">Posts</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/login">Вход</span></a>
+            </li>
+            {% if current_user.has_role('admin') %}
+            <li class="nav-item">
+                <a class="nav-link" href="/admin">Админка</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Выйти</span></a>
+            </li>
+            {% endif %}
+          </ul>
+          <form class="form-inline mt-2 mt-md-0" method="GET">
+            <input class="form-control mr-sm-2" type="text" name="search" value="{{ request.args.get('search', '') }}" placeholder="Поиск" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+    </header>
 
     <main role="main" class="container">
       <div class="row">

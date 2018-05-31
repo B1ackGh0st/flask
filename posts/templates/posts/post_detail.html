@@ -1,22 +1,20 @@
 {% extends 'base.html' %}
 
 {% block title_page %}
-    Blueprint
+    {{ post.title}}
 {% endblock %}
 
-    {% block content %}
+{% block content %}
 
-    <h1>{{ post.title}} </h1>
+<h1>{{ post.title}} </h1>
+<p>{{ post.body}} </p>
+<ul>
+    {% for tag in tags %}
 
-    <p>{{ post.body}} </p>
+    <li><a href="{{ url_for('posts.tag_detail', slug=tag.slug) }}">{{ tag.name }}</li>
 
-    <ul>
-        {% for tag in tags %}
+    {% endfor %}
 
-        <li><a href="{{ url_for('posts.tag_detail', slug=tag.slug) }}">{{ tag.name }}</li>
+</ul>
 
-        {% endfor %}
-
-    </ul>
-
-    {% endblock %}
+{% endblock %}

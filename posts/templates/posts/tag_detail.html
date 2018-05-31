@@ -1,17 +1,17 @@
 {% extends 'base.html' %}
 
 {% block title_page %}
-    {{ tag.name }} posts
+    Посты по тегам {{ tag.name }}
 {% endblock %}
 
     {% block content %}
 
-    <h1>{{ tag.name }} </h1>
+    <h1>Посты по тегам <strong>{{ tag.name }}</strong></h1>
 
     <ul>
     {% for post in posts %}
 
-        <li><a href="{{ url_for('post.post_detail', slug=post.slug) }}">{{ post.title }}</a></li>
+        <li><a href="{{ url_for('posts.post_detail', slug=post.slug) }}">{{ post.title }}</a></li>
 
     {% endfor %}
     </ul>

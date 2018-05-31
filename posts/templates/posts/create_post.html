@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title_page %}
+    Создание поста
+{% endblock %}
+
+{% block content %}
+
+<h1>Создание поста</h1>
+
+<div class="col-md-6">
+    <form action="{{ url_for('posts.create_post') }}" method="POST">
+        {% for field in form %}
+            <div class="form-group">
+                {{ field.label() }}
+                {{ field() }}
+            </div>
+        {% endfor %}
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Сохранить</button>
+    </form>
+</div>
+
+{% endblock %}
